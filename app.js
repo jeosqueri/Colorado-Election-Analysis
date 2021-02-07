@@ -52,8 +52,6 @@ function optionChanged() {
       var countyRep = parseInt(countyFilter.map(row => row.RepVotes));
       console.log(countyRep);
 
-      var countyTotalVotes = countyDem + countyRep;
-      console.log(countyTotalVotes);
 
       //THIRD PARTY
       var countyLib = parseInt(countyFilter.map(row => row.LibVotes));
@@ -64,6 +62,11 @@ function optionChanged() {
 
       var countyOtherTP = parseInt(countyFilter.map(row => row.Total_TP_ExLibGreen));
       console.log(countyOtherTP);
+
+      var countyTotalTP = countyLib + countyGreen + countyOtherTP;
+
+      var countyTotalVotes = countyDem + countyRep + countyLib + countyGreen + countyOtherTP;
+      console.log(countyTotalVotes);
       
 
     // STATE 2020
@@ -88,9 +91,6 @@ function optionChanged() {
       var countyRep16 = parseInt(countyFilter.map(row => row.RepVotes2016));
       console.log(countyRep16);
 
-      var countyTotalVotes16 = countyDem16 + countyRep16;
-      console.log(countyTotalVotes16);
-
       var countyPop16 = parseInt(countyFilter.map(row => row.population2016));
       console.log(countyPop16);
 
@@ -103,6 +103,11 @@ function optionChanged() {
 
       var countyOtherTP16 = parseInt(countyFilter.map(row => row.TP_TV2016_EXLIBGREEN));
       console.log(countyOtherTP16);
+
+      var countyTotalTP16 = countyLib16 + countyGreen16 + countyOtherTP16;
+
+      var countyTotalVotes16 = countyDem16 + countyRep16 + countyLib16 + countyGreen16 + countyOtherTP16;
+      console.log(countyTotalVotes16);
 
       //Difference
       var demDiff = (countyDem - countyDem16);
@@ -120,6 +125,9 @@ function optionChanged() {
       var popDiff = (countyPop - countyPop16);
       console.log(popDiff);
 
+      var turnoutDiff = (countyTotalVotes - countyTotalVotes16);
+      console.log(turnoutDiff);
+
       // DEMOGRAPHICS 2019
       var perWhite = countyFilter.map(row => row.White_Total);
       console.log(perWhite);
@@ -136,6 +144,12 @@ function optionChanged() {
       var perAmericanIn = countyFilter.map(row => row.AI_Total);
       console.log(perAmericanIn);
 
+      var countyPop17 = parseInt(countyFilter.map(row => row.population2017));
+      console.log(countyPop17);
+
+      var countyPop18 = parseInt(countyFilter.map(row => row.population2018));
+      console.log(countyPop18);
+
       
     //PIE 2020
 
@@ -143,7 +157,7 @@ function optionChanged() {
         var pieColors = ['#80aaff', '#FA8072', '#ffff66', '#80ffaa', '#ffcc66']
       var trace1 = {
           type: 'pie',
-          labels: ["Biden/Harris", "Trump/Pence", "Jorgenson", 'Hawkins','Other Third Party'],
+          labels: ["Biden", "Trump", "Jorgenson", 'Hawkins','Other Third Party'],
           values: pieValues,
           type: 'pie',
           marker: {
@@ -167,7 +181,7 @@ function optionChanged() {
         labels: barValues,
         type: 'bar',
         marker: {
-            color: ['#1aa3ff','#ff5050']
+            color: ['#b3e6ff','#ff8080']
         }
       };
 
@@ -185,7 +199,7 @@ function optionChanged() {
         var pieColors = ['#80aaff', '#FA8072', '#ffff66', '#80ffaa', '#ffcc66']
       var trace3 = {
           type: 'pie',
-          labels: ["Clinton/Kaine", "Trump/Pence", "Johnson", "Stein", "Other Third Party"],
+          labels: ["Clinton", "Trump", "Johnson", "Stein", "Other Third Party"],
           values: pieValues,
           type: 'pie',
           marker: {
@@ -209,7 +223,7 @@ function optionChanged() {
         labels: barValues16,
         type: 'bar',
         marker: {
-            color: ['#1aa3ff','#ff5050']
+            color: ['#b3e6ff','#ff8080']
         }
       };
 
@@ -221,6 +235,73 @@ function optionChanged() {
 
 
       Plotly.newPlot('bar2', data4, layout4);
+
+      //Population
+      var popX = [countyPop16, countyPop17, countyPop18, countyPop]
+      trace5 = {
+        //type: 'scatter',
+        x: [2016, 2017, 2018, 2019],
+        y: popX,
+        mode: 'lines+markers',
+        //name: 'Red',
+        marker: {
+          color: '#a3297a',
+          size: 8
+        },
+        line: {
+          color: '#cc3399',
+          width: 3
+        }
+      };
+      
+
+      var data5 = [trace5];
+
+      var layout5 = {
+        title: 'Population Change 2016-2019',
+        xaxis: {
+          title: 'Years'
+        },
+        yaxis: {
+          title: 'Population'
+        }
+      };
+
+      Plotly.newPlot('line', data5, layout5)
+
+      //Vote Dem Rep
+      var demChange = [countyDem16, countyDem]
+      var repChange = [countyRep16, countyRep]
+      var parties = [countyGreen16, countyGreen, countyLib16, countyLib, countyOtherTP16, countyOtherTP]
+      var yVal = ['Green16','Green20','Lib16','Lib20','Other16','Other20']
+      var barColors = ['#ccffcc', '#99ff99', '#ffdab3', '#ffc180', '#e6ccff', '#ce99ff']
+
+      var trace6 = {
+        type: 'bar',
+        x: parties,
+        y: yVal,
+        text: ['Green Party/Stein, 2016', 'Green Party/Hawkins, 2020', 'Libertarian/Johnson, 2016', 'Libertarian/Jorgenson, 2020', 'Other Third Party Candidate, 2016', 'Other Third Party Candidate, 2020'],
+        orientation: 'h',
+        marker: {
+          color: barColors
+        }
+        //text: yValue.map(String),
+        //textposition: 'auto'
+      };
+
+      
+
+      var data6 = [trace6];
+
+      var layout6 = {
+        title: 'Third Party Votes 2016 vs 2020',
+        xaxis: {
+          title: 'Votes Cast'
+        }
+      };
+
+      Plotly.newPlot('line2', data6, layout6)
+      
       
       // FUNCTIONS //
       // ======== //
@@ -270,9 +351,13 @@ function optionChanged() {
       var demData = d3.select('#sample-metadata');
         demData.html('');
     
-    demData.append("li").html(`<b>Population:</b> ${numberFormat(countyPop)}`)
-    demData.append("li").html(`<b>Dem Votes:</b> ${numberFormat(countyDem)}`)
-    demData.append("li").html(`<b>Rep Votes:</b> ${numberFormat(countyRep)}`)
+    demData.append("li").html(`<b>Population(2019):</b> ${numberFormat(countyPop)}`)
+    demData.append("li").html(`<b>Democrat Votes:</b> ${numberFormat(countyDem)}`)
+    demData.append("li").html(`<b>Republican Votes:</b> ${numberFormat(countyRep)}`)
+    //demData.append("li").html(`<b>Libertarian Votes:</b> ${numberFormat(countyLib)}`)
+    //demData.append("li").html(`<b>Green Votes:</b> ${numberFormat(countyGreen)}`)
+    demData.append("li").html(`<b>Third Party Votes:</b> ${numberFormat(countyTotalTP)}`)
+    demData.append("li").html(`<b>Total Votes:</b> ${numberFormat(countyTotalVotes)}`)
     //demData.append("li").html(`<b>% of Population Voted:</b> ${percentFormat(percentVote)}%`) //this is all ages and not including third parties
     // demData.append("li").html(`<b> Winner 2020:</b> ${winner(winner)}`)
     // demData.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
@@ -281,8 +366,12 @@ function optionChanged() {
     var demData16 = d3.select('#sample-metadata16');
         demData16.html('');
     demData16.append("li").html(`<b>Population:</b> ${numberFormat(countyPop16)}`)
-    demData16.append("li").html(`<b>Dem Votes:</b> ${numberFormat(countyDem16)}`)
-    demData16.append("li").html(`<b>Rep Votes:</b> ${numberFormat(countyRep16)}`)
+    demData16.append("li").html(`<b>Democrat Votes:</b> ${numberFormat(countyDem16)}`)
+    demData16.append("li").html(`<b>Republican Votes:</b> ${numberFormat(countyRep16)}`)
+    //demData16.append("li").html(`<b>Libertarian Votes:</b> ${numberFormat(countyLib16)}`)
+    //demData16.append("li").html(`<b>Green Votes:</b> ${numberFormat(countyGreen16)}`)
+    demData16.append("li").html(`<b>Third Party Votes:</b> ${numberFormat(countyTotalTP16)}`)
+    demData16.append("li").html(`<b>Total Votes:</b> ${numberFormat(countyTotalVotes16)}`)
     //demData16.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
 
     var dataCompare = d3.select('#sample-comparison');
@@ -291,18 +380,19 @@ function optionChanged() {
     dataCompare.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
     dataCompare.append("li").html(`<b> Flipped:</b> ${countyFlip(countyFlip)}`)
     dataCompare.append("li").html(`<b> Population Difference:</b> ${numberFormat(popDiff)}`)
-    dataCompare.append("li").html(`<b> Dem Vote Difference:</b> ${numberFormat(demDiff)}`)
-    dataCompare.append("li").html(`<b> Rep Vote Difference:</b> ${numberFormat(repDiff)}`)
-    dataCompare.append("li").html(`<b> Lib Vote Difference:</b> ${numberFormat(libDiff)}`)
-    dataCompare.append("li").html(`<b> Green Vote Difference:</b> ${numberFormat(greenDiff)}`)
-    dataCompare.append("li").html(`<b> Other TP Vote Difference:</b> ${numberFormat(tpDiff)}`)
+    dataCompare.append("li").html(`<b> Turnout Difference:</b> ${numberFormat(turnoutDiff)}`)
+    dataCompare.append("li").html(`<b> Democractic Vote Difference:</b> ${numberFormat(demDiff)}`)
+    dataCompare.append("li").html(`<b> Republican Vote Difference:</b> ${numberFormat(repDiff)}`)
+    dataCompare.append("li").html(`<b> Libertarian Vote Difference:</b> ${numberFormat(libDiff)}`)
+    dataCompare.append("li").html(`<b> Green Party Vote Difference:</b> ${numberFormat(greenDiff)}`)
+    dataCompare.append("li").html(`<b> Other Third Party Candidate Vote Difference:</b> ${numberFormat(tpDiff)}`)
 
     var dataDem = d3.select('#sample-dem');
         dataDem.html('');
-    dataDem.append("li").html(`<b>Percent White Total:</b>: ${percentFormat(perWhite) * 100}%`)
-    dataDem.append("li").html(`<b>Percent Hispanic Total:</b>: ${percentFormat(perHispanic) * 100}%`)
-    dataDem.append("li").html(`<b>Percent Black Total:</b>: ${percentFormat(perBlack) * 100}%`)
-    dataDem.append("li").html(`<b>Percent Asian Total:</b>: ${percentFormat(perAsian) * 100}%`)
-    dataDem.append("li").html(`<b>Percent American Indian Total:</b>: ${percentFormat(perAmericanIn) * 100}%`)
+    dataDem.append("li").html(`<b>Percent White Total:</b> ${percentFormat(perWhite) * 100}%`)
+    dataDem.append("li").html(`<b>Percent Hispanic Total:</b> ${percentFormat(perHispanic) * 100}%`)
+    dataDem.append("li").html(`<b>Percent Black Total:</b> ${percentFormat(perBlack) * 100}%`)
+    dataDem.append("li").html(`<b>Percent Asian Total:</b> ${percentFormat(perAsian) * 100}%`)
+    dataDem.append("li").html(`<b>Percent American Indian Total:</b> ${percentFormat(perAmericanIn) * 100}%`)
     })
 }
