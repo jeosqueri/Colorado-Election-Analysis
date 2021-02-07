@@ -93,7 +93,7 @@ function optionChanged() {
     //PIE 2020
 
         var pieValues = [countyDem, countyRep]
-        var pieColors = ['#FFA07A', '#FA8072']
+        var pieColors = ['#80aaff', '#FA8072']
       var trace1 = {
           type: 'pie',
           labels: ["Biden/Harris", "Trump/Pence"],
@@ -115,12 +115,12 @@ function optionChanged() {
       // Bar charr total votes 2020
       var barValues = [countyDem, countyRep]
       var trace2 = {
-        x: ['Dem','Rep'],
+        x: ['Biden','Trump'],
         y: barValues,
         labels: barValues,
         type: 'bar',
         marker: {
-            color: ['#3399ff','#ff5050']
+            color: ['#1aa3ff','#ff5050']
         }
       };
 
@@ -135,7 +135,7 @@ function optionChanged() {
 
       // 2016Results
       var pieValues = [countyDem16, countyRep16]
-        var pieColors = ['#FFA07A', '#FA8072']
+        var pieColors = ['#80aaff', '#FA8072']
       var trace3 = {
           type: 'pie',
           labels: ["Clinton/Kaine", "Trump/Pence"],
@@ -157,12 +157,12 @@ function optionChanged() {
       //2016 barValues
       var barValues16 = [countyDem16, countyRep16]
       var trace4 = {
-        x: ['Dem','Rep'],
+        x: ['Clinton','Trump'],
         y: barValues16,
         labels: barValues16,
         type: 'bar',
         marker: {
-            color: ['#3399ff','#ff5050']
+            color: ['#1aa3ff','#ff5050']
         }
       };
 
@@ -222,7 +222,7 @@ function optionChanged() {
     demData.append("li").html(`<b>Population:</b> ${numberFormat(countyPop)}`)
     demData.append("li").html(`<b>Dem Votes:</b> ${numberFormat(countyDem)}`)
     demData.append("li").html(`<b>Rep Votes:</b> ${numberFormat(countyRep)}`)
-    demData.append("li").html(`<b>% of Population Voted:</b> ${percentFormat(percentVote)}%`) //this is all ages and not including third parties
+    //demData.append("li").html(`<b>% of Population Voted:</b> ${percentFormat(percentVote)}%`) //this is all ages and not including third parties
     // demData.append("li").html(`<b> Winner 2020:</b> ${winner(winner)}`)
     // demData.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
     // demData.append("li").html(`<b> Flipped:</b> ${countyFlip(countyFlip)}`)
@@ -232,13 +232,13 @@ function optionChanged() {
     demData16.append("li").html(`<b>Population:</b> ${numberFormat(countyPop16)}`)
     demData16.append("li").html(`<b>Dem Votes:</b> ${numberFormat(countyDem16)}`)
     demData16.append("li").html(`<b>Rep Votes:</b> ${numberFormat(countyRep16)}`)
-    demData16.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
+    //demData16.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
 
     var dataCompare = d3.select('#sample-comparison');
         dataCompare.html('');
     dataCompare.append("li").html(`<b> Winner 2020:</b> ${winner(winner)}`)
     dataCompare.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
     dataCompare.append("li").html(`<b> Flipped:</b> ${countyFlip(countyFlip)}`)
-    dataCompare.append("li").html(`<b> Population Difference:</b> +${numberFormat(popDiff)}`)
+    dataCompare.append("li").html(`<b> Population Difference:</b> ${numberFormat(popDiff)}`)
     })
 }
