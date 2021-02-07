@@ -79,6 +79,16 @@ function optionChanged() {
 
       var countyTotalVotes16 = countyDem16 + countyRep16;
       console.log(countyTotalVotes16);
+
+      var countyPop16 = parseInt(countyFilter.map(row => row.population2016));
+      console.log(countyPop16);
+
+      //Difference
+      var demDiff = (countyDem - countyDem16);
+      console.log(demDiff);
+
+      var popDiff = (countyPop - countyPop16);
+      console.log(popDiff);
       
     //PIE 2020
 
@@ -143,6 +153,27 @@ function optionChanged() {
       };
   
       Plotly.newPlot('pie2', data3, layout3);
+
+      //2016 barValues
+      var barValues16 = [countyDem16, countyRep16]
+      var trace4 = {
+        x: ['Dem','Rep'],
+        y: barValues16,
+        labels: barValues16,
+        type: 'bar',
+        marker: {
+            color: ['#3399ff','#ff5050']
+        }
+      };
+
+
+      var data4 = [trace4];
+      var layout4 = {
+        title: `Democractic/Republican Votes 2016`
+      };
+
+
+      Plotly.newPlot('bar2', data4, layout4);
       // 
       function winner(winner) { 
       if (countyDem > countyRep) {
@@ -188,13 +219,26 @@ function optionChanged() {
       var demData = d3.select('#sample-metadata');
         demData.html('');
     
-    demData.append("li").html(`<b>Total County Population:</b> ${numberFormat(countyPop)}`)
-    demData.append("li").html(`<b>Total Dem County Votes:</b> ${numberFormat(countyDem)}`)
-    demData.append("li").html(`<b>Total Rep Votes:</b> ${numberFormat(countyRep)}`)
+    demData.append("li").html(`<b>Population:</b> ${numberFormat(countyPop)}`)
+    demData.append("li").html(`<b>Dem Votes:</b> ${numberFormat(countyDem)}`)
+    demData.append("li").html(`<b>Rep Votes:</b> ${numberFormat(countyRep)}`)
     demData.append("li").html(`<b>% of Population Voted:</b> ${percentFormat(percentVote)}%`) //this is all ages and not including third parties
-    demData.append("li").html(`<b> Winner 2020:</b> ${winner(winner)}`)
-    demData.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
-    demData.append("li").html(`<b> Flipped:</b> ${countyFlip(countyFlip)}`)
+    // demData.append("li").html(`<b> Winner 2020:</b> ${winner(winner)}`)
+    // demData.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
+    // demData.append("li").html(`<b> Flipped:</b> ${countyFlip(countyFlip)}`)
 
+    var demData16 = d3.select('#sample-metadata16');
+        demData16.html('');
+    demData16.append("li").html(`<b>Population:</b> ${numberFormat(countyPop16)}`)
+    demData16.append("li").html(`<b>Dem Votes:</b> ${numberFormat(countyDem16)}`)
+    demData16.append("li").html(`<b>Rep Votes:</b> ${numberFormat(countyRep16)}`)
+    demData16.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
+
+    var dataCompare = d3.select('#sample-comparison');
+        dataCompare.html('');
+    dataCompare.append("li").html(`<b> Winner 2020:</b> ${winner(winner)}`)
+    dataCompare.append("li").html(`<b> Winner 2016:</b> ${winner16(winner16)}`)
+    dataCompare.append("li").html(`<b> Flipped:</b> ${countyFlip(countyFlip)}`)
+    dataCompare.append("li").html(`<b> Population Difference:</b> +${numberFormat(popDiff)}`)
     })
 }
