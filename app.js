@@ -274,7 +274,7 @@ function optionChanged() {
       var repChange = [countyRep16, countyRep]
       var parties = [countyGreen16, countyGreen, countyLib16, countyLib, countyOtherTP16, countyOtherTP]
       var yVal = ['Green16','Green20','Lib16','Lib20','Other16','Other20']
-      var barColors = ['#ccffcc', '#99ff99', '#ffdab3', '#ffc180', '#e6ccff', '#ce99ff']
+      var barColors = ['#85e0e0', '#cc0099', '#85e0e0', '#cc0099', '#85e0e0', '#cc0099']
 
       var trace6 = {
         type: 'bar',
