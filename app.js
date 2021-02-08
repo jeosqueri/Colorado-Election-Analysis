@@ -394,6 +394,17 @@ function buildPlot(county){
       dataCompare.append("li").html(`<b> Green Party Vote Difference:</b> ${numberFormat(greenDiff)}`)
       dataCompare.append("li").html(`<b> Other Third Party Candidate Vote Difference:</b> ${numberFormat(tpDiff)}`)
 
+      //County Differences 2016 vs 2020
+      // var dataCompare2 = d3.select('#sample-comparison2');
+      //   dataCompare2.html('');
+      // dataCompare2.append("li").html(`<b> Population Difference:</b> ${numberFormat(popDiff)}`)
+      // dataCompare2.append("li").html(`<b> Turnout Difference:</b> ${numberFormat(turnoutDiff)}`)
+      // dataCompare2.append("li").html(`<b> Democractic Vote Difference:</b> ${numberFormat(demDiff)}`)
+      // dataCompare2.append("li").html(`<b> Republican Vote Difference:</b> ${numberFormat(repDiff)}`)
+      // dataCompare2.append("li").html(`<b> Libertarian Vote Difference:</b> ${numberFormat(libDiff)}`)
+      // dataCompare2.append("li").html(`<b> Green Party Vote Difference:</b> ${numberFormat(greenDiff)}`)
+      // dataCompare2.append("li").html(`<b> Other Third Party Vote Difference:</b> ${numberFormat(tpDiff)}`)
+
       //County Demographic Info 2019
       var dataDem = d3.select('#sample-dem');
         dataDem.html('');
