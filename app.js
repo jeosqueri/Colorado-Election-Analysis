@@ -185,7 +185,7 @@ function buildPlot(county){
       var data2 = [trace2];
 
       var layout2 = {
-        title: `Democractic vs. Republican Votes 2020`
+        title: `Democratic vs. Republican Votes 2020`
       };
 
       Plotly.newPlot('bar', data2, layout2);
@@ -228,7 +228,7 @@ function buildPlot(county){
       var data4 = [trace4];
 
       var layout4 = {
-        title: `Democractic vs. Republican Votes 2016`
+        title: `Democratic vs. Republican Votes 2016`
       };
 
       Plotly.newPlot('bar2', data4, layout4);
@@ -299,7 +299,7 @@ function buildPlot(county){
       var data6 = [trace6, trace7];
 
       var layout6 = {
-        title: `${county} County Third Party Votes 2016 vs 2020`,
+        title: `${county} County Third Party Votes 2016 vs. 2020`,
         yaxis: {
           title: 'Votes Cast'
         },
@@ -388,7 +388,7 @@ function buildPlot(county){
       dataCompare.append("li").html(`<b> Flipped from 2016:</b> ${countyFlip(countyFlip)}`)
       dataCompare.append("li").html(`<b> Population Difference:</b> ${numberFormat(popDiff)}`)
       dataCompare.append("li").html(`<b> Turnout Difference:</b> ${numberFormat(turnoutDiff)}`)
-      dataCompare.append("li").html(`<b> Democractic Vote Difference:</b> ${numberFormat(demDiff)}`)
+      dataCompare.append("li").html(`<b> Democratic Vote Difference:</b> ${numberFormat(demDiff)}`)
       dataCompare.append("li").html(`<b> Republican Vote Difference:</b> ${numberFormat(repDiff)}`)
       dataCompare.append("li").html(`<b> Libertarian Vote Difference:</b> ${numberFormat(libDiff)}`)
       dataCompare.append("li").html(`<b> Green Party Vote Difference:</b> ${numberFormat(greenDiff)}`)
